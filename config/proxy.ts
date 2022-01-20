@@ -14,21 +14,21 @@ export default {
       target: 'https://preview.pro.ant.design',
       // 配置了这个可以从 http 代理到 https
       // 依赖 origin 的功能可能需要这个，比如 cookie
-      changeOrigin: true,
-    },
+      changeOrigin: true
+    }
   },
   test: {
     '/api/': {
       target: 'https://proapi.azurewebsites.net',
       changeOrigin: true,
-      pathRewrite: { '^': '' },
-    },
+      pathRewrite: { '^': '' }
+    }
   },
   pre: {
     '/api/': {
       target: 'your pre url',
       changeOrigin: true,
-      pathRewrite: { '^': '' },
-    },
-  },
-};
+      pathRewrite: { '^': '' }
+    }
+  }
+}

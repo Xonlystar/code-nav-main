@@ -1,29 +1,19 @@
-import type { BasicLayoutProps as ProLayoutProps, MenuDataItem } from '@ant-design/pro-layout'
+import type { BasicLayoutProps as ProLayoutProps } from '@ant-design/pro-layout'
 import ProLayout from '@ant-design/pro-layout'
 import React, { useEffect } from 'react'
 import type { Dispatch } from 'umi'
 import { connect, history, Link } from 'umi'
-import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  GlobalOutlined,
-  HomeOutlined,
-  SafetyOutlined,
-  SketchOutlined,
-  UserAddOutlined
-} from '@ant-design/icons'
-import { Button, Menu, notification, Result } from 'antd'
+import { AppstoreOutlined, GlobalOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons'
+import { Button, notification, Result } from 'antd'
 import Authorized from '@/utils/Authorized'
 import RightContent from '@/components/GlobalHeader/RightContent'
 import GlobalFooter from '@/components/GlobalFooter'
-import SubMenu from 'antd/lib/menu/SubMenu'
 import type { CurrentUser } from '@/models/user'
 import type { ConnectState } from '@/models/connect'
 import { stringify } from 'querystring'
 import { closeNoticeWatcher, openNoticeWatcher } from '@/services/notice'
 import defaultSettings from '../../../config/defaultSettings'
 import logo from '@/assets/logo.png'
-import menu from '../../../config/menu'
 import './index.less'
 
 const noMatch = (
@@ -57,20 +47,6 @@ export interface BasicLayoutProps extends ProLayoutProps {
   currentUser: CurrentUser
 }
 
-/**
- * use Authorized check all menu item
- */
-
-const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => {
-  return menuList.map(item => {
-    const localItem = {
-      ...item,
-      children: item.children ? menuDataRender(item.children) : undefined
-    }
-    return Authorized.check(item.authority, localItem, null) as MenuDataItem
-  })
-}
-
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
   const {
     dispatch,
@@ -80,8 +56,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
       pathname: '/'
     },
     userId,
-    currentUser,
-    currentAuthority
+    currentUser
   } = props
 
   useEffect(() => {
@@ -125,13 +100,39 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     }
   })
 
+  const defaultRoutes = {
+    routes: [
+      {
+        path: '/',
+        name: '主页',
+        icon: <HomeOutlined />
+      },
+      {
+        path: '/resources',
+        name: '资源',
+        icon: <AppstoreOutlined />
+      },
+      {
+        path: '/wish',
+        name: '世界',
+        icon: <GlobalOutlined />
+      },
+      {
+        path: '/account/info',
+        name: '个人',
+        icon: <UserOutlined />
+      }
+    ]
+  }
+
   return (
     <ProLayout
       logo={logo}
       {...props}
+      route={defaultRoutes}
       {...defaultSettings}
-      layout="side"
-      navTheme="realDark"
+      layout="top"
+      navTheme="light"
       onMenuHeaderClick={() => history.push('/')}
       menuItemRender={(menuItemProps, defaultDom) => {
         if (menuItemProps.isUrl || !menuItemProps.path) {
@@ -140,45 +141,6 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
         return <Link to={menuItemProps.path}>{defaultDom}</Link>
       }}
       footerRender={() => <GlobalFooter />}
-      menuDataRender={() => menuDataRender(menu)}
-      headerContentRender={() => (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Menu
-            mode="horizontal"
-            selectedKeys={[location.pathname ?? '/']}
-            onClick={({ key }) => history.push(key)}
-            style={{ height: '100%', border: 0 }}
-          >
-            {currentUser._id && (
-              <Menu.Item key="/account/info" icon={<HomeOutlined />}>
-                个人
-              </Menu.Item>
-            )}
-            <Menu.Item key="/recommend" icon={<SketchOutlined />}>
-              发现
-            </Menu.Item>
-            <Menu.Item key="/resources" icon={<AppstoreOutlined />}>
-              资源
-            </Menu.Item>
-            <SubMenu key="/world" icon={<GlobalOutlined />} title="世界">
-              <Menu.Item key="/friend" icon={<UserAddOutlined />}>
-                找伙伴
-              </Menu.Item>
-              <Menu.Item key="/ranking" icon={<BarChartOutlined />}>
-                激励榜
-              </Menu.Item>
-            </SubMenu>
-            {currentUser._id && currentAuthority.includes('admin') && (
-              <SubMenu key="/review" icon={<SafetyOutlined />} title="运营">
-                <Menu.Item key="/review/resource">审核资源</Menu.Item>
-                <Menu.Item key="/review/comment">审核评论</Menu.Item>
-                <Menu.Item key="/review/report">审核举报</Menu.Item>
-                <Menu.Item key="/review/notice">公告管理</Menu.Item>
-              </SubMenu>
-            )}
-          </Menu>
-        </div>
-      )}
       rightContentRender={() => <RightContent />}
     >
       <Authorized authority={authority} noMatch={noMatch}>

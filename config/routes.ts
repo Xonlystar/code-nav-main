@@ -19,8 +19,10 @@ export default [
         component: '../layouts/BasicLayout',
         routes: [
           {
+            name: '优选资源',
+            icon: 'like',
             path: '/',
-            redirect: '/recommend'
+            component: './Recommend'
           },
           {
             name: '个人中心',
@@ -53,12 +55,6 @@ export default [
                 component: './AccountCenter/MyMessages'
               }
             ]
-          },
-          {
-            name: '优选资源',
-            icon: 'like',
-            path: '/recommend',
-            component: './Recommend'
           },
           {
             name: '资源大全',

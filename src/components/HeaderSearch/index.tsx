@@ -1,4 +1,3 @@
-import { SearchOutlined } from '@ant-design/icons'
 import { AutoComplete, Input } from 'antd'
 import useMergedState from 'rc-util/es/hooks/useMergedState'
 import type { AutoCompleteProps } from 'antd/es/auto-complete'
@@ -38,6 +37,7 @@ const HeaderSearch: React.FC<HeaderSearchProps> = props => {
   const inputClass = classNames(styles.input, {
     [styles.show]: searchMode
   })
+
   return (
     <div
       className={classNames(className, styles.headerSearch)}
@@ -55,24 +55,20 @@ const HeaderSearch: React.FC<HeaderSearchProps> = props => {
         }
       }}
     >
-      <SearchOutlined
-        key="Icon"
-        style={{
-          cursor: 'pointer'
-        }}
-      />
       <AutoComplete
         key="AutoComplete"
+        style={{ width: '100%' }}
         className={inputClass}
         value={value}
         options={restProps.options}
         onChange={setValue}
       >
-        <Input
-          size="small"
+        <Input.Search
+          size="large"
           ref={inputRef}
           defaultValue={defaultValue}
           aria-label={placeholder}
+          enterButton
           placeholder={placeholder}
           onKeyDown={e => {
             if (e.key === 'Enter') {

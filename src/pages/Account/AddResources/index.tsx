@@ -7,11 +7,11 @@ import { searchResourcesByPage } from '@/services/resource'
 import type { CurrentUser } from '@/models/user'
 import type { ConnectState } from '@/models/connect'
 
-interface MyAddResourcesProps {
+interface AddResourcesProps {
   currentUser?: CurrentUser
 }
 
-interface MyAddResourcesState {
+interface AddResourcesState {
   resources?: ResourceType[]
   total: number
   loading: boolean
@@ -29,21 +29,21 @@ const listGrid = {
 
 const DEFAULT_PAGE_SIZE = 6
 
-class MyAddResources extends Component<MyAddResourcesProps, MyAddResourcesState> {
-  state: MyAddResourcesState = {
+class AddResources extends Component<AddResourcesProps, AddResourcesState> {
+  state: AddResourcesState = {
     resources: [],
     total: 0,
     loading: true
   }
 
   componentDidMount() {
-    this.loadMyAddResources(1, DEFAULT_PAGE_SIZE)
+    this.loadAddResources(1, DEFAULT_PAGE_SIZE)
   }
 
   /**
    * 加载我推荐的资源
    */
-  loadMyAddResources(pageNum: number, pageSize: number) {
+  loadAddResources(pageNum: number, pageSize: number) {
     const { currentUser } = this.props
 
     if (currentUser && currentUser._id) {
@@ -85,7 +85,7 @@ class MyAddResources extends Component<MyAddResourcesProps, MyAddResourcesState>
             pageSizeOptions: [DEFAULT_PAGE_SIZE.toString(), '12', '24'],
             onChange: (pageNum, pageSize) => {
               if (pageSize) {
-                this.loadMyAddResources(pageNum, pageSize)
+                this.loadAddResources(pageNum, pageSize)
               }
             }
           }}
@@ -116,4 +116,4 @@ class MyAddResources extends Component<MyAddResourcesProps, MyAddResourcesState>
 
 export default connect(({ user }: ConnectState) => ({
   currentUser: user.currentUser
-}))(MyAddResources)
+}))(AddResources)

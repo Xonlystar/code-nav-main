@@ -110,7 +110,7 @@ const HeaderSearch: React.FC<HeaderSearchProps> = props => {
   return (
     <div className={styles.headerSearch} style={style}>
       <AutoComplete options={options} style={{ width: '100%' }}>
-        <Input.Search placeholder={placeholder} size="large" enterButton onSearch={handleSearch} />
+        <Input.Search placeholder={placeholder} enterButton onSearch={handleSearch} />
       </AutoComplete>
     </div>
   )

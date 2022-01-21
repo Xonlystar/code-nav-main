@@ -6,18 +6,18 @@ type DefaultSettings = Partial<ProSettings> & {
 
 const proSettings: DefaultSettings = {
   navTheme: 'light',
+  headerTheme: 'light',
   primaryColor: '#1890ff',
-  layout: 'top',
+  layout: 'mix',
   contentWidth: 'Fluid',
-  fixedHeader: true,
-  fixSiderbar: false,
+  fixedHeader: false,
+  fixSiderbar: true,
   colorWeak: false,
   title: '编程导航',
   pwa: false,
   headerHeight: 48,
   iconfontUrl: '',
-  splitMenus: false,
-  menuRender: false
+  splitMenus: true
 }
 
 export type { DefaultSettings }

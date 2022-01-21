@@ -1,5 +1,5 @@
-import { Badge, Card, Descriptions, Image, message, Modal, Progress, Tag, Tooltip } from 'antd'
-import React, { Component } from 'react'
+import { Card, Descriptions, Image, message, Modal, Progress, Tag, Tooltip } from 'antd'
+import { Component } from 'react'
 import { GridContent } from '@ant-design/pro-layout'
 import type { Dispatch } from 'umi'
 import { connect } from 'umi'
@@ -128,27 +128,25 @@ class MyInfo extends Component<MyInfoProps, MyInfoState> {
 
     return currentUser._id ? (
       <GridContent>
-        <Badge.Ribbon text={currentUser?.title} className={currentUser?.title ? '' : 'hidden'}>
-          <Card bordered={false} style={{ marginBottom: 24 }} loading={dataLoading}>
-            <div className={styles.avatarHolder}>
-              <Image className={styles.avatar} src={currentUser?.avatarUrl} />
-              <div className={styles.name}>{currentUser?.nickName}</div>
-              <Tag color={level.color} style={{ marginRight: 0, margin: '8px 0', userSelect: 'none' }}>
-                {level.name}
-              </Tag>
-              <Tooltip title={`积分：${currentUser?.score} / ${level.score}`} placement="topRight">
-                <Progress percent={(score * 100) / level.score} size="small" showInfo={false} />
-              </Tooltip>
-            </div>
-            <Descriptions
-              title="兴趣"
-              column={1}
-              extra={<SettingTwoTone style={{ fontSize: 16 }} onClick={this.openInterestsModal} />}
-            >
-              <Descriptions.Item>{interestsTagView}</Descriptions.Item>
-            </Descriptions>
-          </Card>
-        </Badge.Ribbon>
+        <Card bordered={false} style={{ marginBottom: 24 }} loading={dataLoading}>
+          <div className={styles.avatarHolder}>
+            <Image className={styles.avatar} src={currentUser?.avatarUrl} />
+            <div className={styles.name}>{currentUser?.nickName}</div>
+            <Tag color={level.color} style={{ marginRight: 0, margin: '8px 0', userSelect: 'none' }}>
+              {level.name}
+            </Tag>
+            <Tooltip title={`积分：${currentUser?.score} / ${level.score}`} placement="topRight">
+              <Progress percent={(score * 100) / level.score} size="small" showInfo={false} />
+            </Tooltip>
+          </div>
+          <Descriptions
+            title="兴趣"
+            column={1}
+            extra={<SettingTwoTone style={{ fontSize: 16 }} onClick={this.openInterestsModal} />}
+          >
+            <Descriptions.Item>{interestsTagView}</Descriptions.Item>
+          </Descriptions>
+        </Card>
         <Modal
           title={`设置兴趣（至多 ${MAX_INTEREST_NUM} 个）`}
           visible={showInterestsModal}

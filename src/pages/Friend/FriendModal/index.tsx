@@ -14,7 +14,7 @@ import './style.less'
 
 const FormItem = Form.Item
 
-interface MyFriendModalProps {
+interface FriendModalProps {
   dispatch: Dispatch
   wholeTagsMap: WholeTagsMap
   currentUser: CurrentUser
@@ -36,7 +36,7 @@ const formItemLayout = {
  * @param props
  * @constructor
  */
-const MyFriendModal: FC<MyFriendModalProps> = props => {
+const FriendModal: FC<FriendModalProps> = props => {
   const { wholeTagsMap, currentUser, visible, onClose, reload } = props
   const [form] = Form.useForm()
   const [submitting, setSubmitting] = useState<boolean>(false)
@@ -155,4 +155,4 @@ export default connect(({ loading, user, tag }: ConnectState) => ({
   submitting: loading.effects['resource/add'] || loading.effects['resource/update'],
   wholeTagsMap: tag.wholeTagsMap,
   currentUser: user.currentUser
-}))(MyFriendModal)
+}))(FriendModal)

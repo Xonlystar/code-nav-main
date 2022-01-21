@@ -7,11 +7,11 @@ import type { CurrentUser } from '@/models/user'
 import type { ConnectState } from '@/models/connect'
 import { getUserLikeResourcesByPage } from '@/services/user'
 
-interface MyLikeResourcesProps {
+interface LikeResourcesProps {
   currentUser?: CurrentUser
 }
 
-interface MyLikeResourcesState {
+interface LikeResourcesState {
   resources?: ResourceType[]
   total: number
   loading: boolean
@@ -29,21 +29,21 @@ const listGrid = {
 
 const pageSize = 6
 
-class MyLikeResources extends Component<MyLikeResourcesProps, MyLikeResourcesState> {
-  state: MyLikeResourcesState = {
+class LikeResources extends Component<LikeResourcesProps, LikeResourcesState> {
+  state: LikeResourcesState = {
     resources: [],
     total: 0,
     loading: true
   }
 
   componentDidMount() {
-    this.loadMyLikeResources(1)
+    this.loadLikeResources(1)
   }
 
   /**
    * 加载我收藏的资源
    */
-  loadMyLikeResources(pageNum: number) {
+  loadLikeResources(pageNum: number) {
     const { currentUser } = this.props
 
     if (currentUser && currentUser._id) {
@@ -79,7 +79,7 @@ class MyLikeResources extends Component<MyLikeResourcesProps, MyLikeResourcesSta
             pageSize,
             total,
             onChange: pageNum => {
-              this.loadMyLikeResources(pageNum)
+              this.loadLikeResources(pageNum)
             }
           }}
           dataSource={resources}
@@ -109,4 +109,4 @@ class MyLikeResources extends Component<MyLikeResourcesProps, MyLikeResourcesSta
 
 export default connect(({ user }: ConnectState) => ({
   currentUser: user.currentUser
-}))(MyLikeResources)
+}))(LikeResources)

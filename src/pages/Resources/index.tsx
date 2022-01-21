@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import React, { useEffect, useState } from 'react'
-import { Button, Card, Empty, Form, List, Radio } from 'antd'
+import { useEffect, useState } from 'react'
+import { Button, Card, Empty, Form, List, Radio, Checkbox } from 'antd'
 import { PageContainer } from '@ant-design/pro-layout'
 import { connect, history, Link } from 'umi'
 import type { ConnectState } from '@/models/connect'
@@ -10,7 +10,7 @@ import ResourceCard from '@/components/ResourceCard'
 import type { ResourceSearchParams } from '@/services/resource'
 import { searchResourcesByPage } from '@/services/resource'
 import reviewStatusEnum from '@/constant/reviewStatusEnum'
-import { RiseOutlined, TagsOutlined } from '@ant-design/icons/lib'
+import { RiseOutlined, TagsOutlined, LikeOutlined } from '@ant-design/icons/lib'
 import type { CurrentUser } from '@/models/user'
 import { CATEGORY_MAP } from '@/constant/categoryMap'
 import { PRE_PAGE_STATE } from '@/constant'
@@ -169,10 +169,21 @@ const Resources: FC<ResourcesProps> = props => {
             name="orderKey"
           >
             <Radio.Group>
+              <Radio.Button value="_score">综合</Radio.Button>
               <Radio.Button value="_createTime">时间</Radio.Button>
               <Radio.Button value="rate">评价</Radio.Button>
               <Radio.Button value="likeNum">收藏</Radio.Button>
             </Radio.Group>
+          </Form.Item>
+          <Form.Item
+            label={
+              <>
+                <LikeOutlined /> <span style={{ marginLeft: 8 }}>精选</span>
+              </>
+            }
+            name="priority"
+          >
+            <Checkbox>只看精选</Checkbox>
           </Form.Item>
         </Form>
       </Card>

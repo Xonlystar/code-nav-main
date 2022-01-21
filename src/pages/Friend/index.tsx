@@ -12,7 +12,7 @@ import { EditOutlined, LikeFilled, LikeOutlined, MessageOutlined } from '@ant-de
 import type { UserIntroduceUserType } from '@/models/userIntroduce'
 import type { UserIntroduceSearchParams } from '@/services/userIntroduce'
 import { searchUserIntroduces, thumbUpUserIntroduce } from '@/services/userIntroduce'
-import MyFriendModal from '@/pages/Friend/MyFriendModal'
+import FriendModal from '@/pages/Friend/FriendModal'
 import reviewStatusEnum from '@/constant/reviewStatusEnum'
 import copy from 'copy-to-clipboard'
 import moment from 'moment'
@@ -162,7 +162,7 @@ const Friend: FC<FriendProps> = props => {
           }}
         />
       </Card>
-      <MyFriendModal
+      <FriendModal
         visible={modalVisible}
         onClose={() => {
           setModalVisible(false)

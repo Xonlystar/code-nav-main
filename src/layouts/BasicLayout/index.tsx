@@ -23,6 +23,7 @@ import { stringify } from 'querystring'
 import { closeNoticeWatcher, openNoticeWatcher } from '@/services/notice'
 import defaultSettings from '../../../config/defaultSettings'
 import logo from '@/assets/logo.png'
+import menu from '../../../config/menu'
 import './index.less'
 
 const noMatch = (
@@ -139,7 +140,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
         return <Link to={menuItemProps.path}>{defaultDom}</Link>
       }}
       footerRender={() => <GlobalFooter />}
-      menuDataRender={() => menuDataRender([])}
+      menuDataRender={() => menuDataRender(menu)}
       headerContentRender={() => (
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Menu

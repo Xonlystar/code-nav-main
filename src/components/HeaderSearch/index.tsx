@@ -1,86 +1,116 @@
-import { AutoComplete, Input } from 'antd'
-import useMergedState from 'rc-util/es/hooks/useMergedState'
-import type { AutoCompleteProps } from 'antd/es/auto-complete'
-import React, { useRef } from 'react'
-
-import classNames from 'classnames'
+import { AutoComplete, Input, Modal, Space } from 'antd'
+import type { CSSProperties } from 'react'
+import React, { useState } from 'react'
+import { history } from '@@/core/history'
+import { CloseOutlined, DeleteOutlined } from '@ant-design/icons'
+import {
+  addSearchHistory,
+  deleteAllSearchHistory,
+  deleteSearchHistory,
+  listSearchHistory
+} from '@/services/searchHistory'
 import styles from './index.less'
 
 export type HeaderSearchProps = {
   onSearch?: (value?: string) => void
   onChange?: (value?: string) => void
-  onVisibleChange?: (b: boolean) => void
-  className?: string
-  placeholder?: string
-  options: AutoCompleteProps['options']
-  defaultVisible?: boolean
-  visible?: boolean
   defaultValue?: string
   value?: string
+  style?: CSSProperties
+  placeholder?: string
 }
 
 const HeaderSearch: React.FC<HeaderSearchProps> = props => {
-  const { className, defaultValue, onVisibleChange, placeholder, visible, defaultVisible, ...restProps } = props
+  const { style, placeholder } = props
+  const [searchHistoryList, setSearchHistoryList] = useState<string[]>(listSearchHistory())
 
-  const inputRef = useRef<Input | null>(null)
+  const handleSearch = (value: string) => {
+    history.push({
+      pathname: '/resources/',
+      query: {
+        q: value
+      }
+    })
+    addSearchHistory(value)
+    setSearchHistoryList(listSearchHistory())
+  }
 
-  const [value, setValue] = useMergedState<string | undefined>(defaultValue, {
-    value: props.value,
-    onChange: props.onChange
+  /**
+   * 清空搜索历史
+   */
+  const clearAll = () => {
+    if (searchHistoryList.length > 0) {
+      Modal.confirm({
+        title: '确定要清空搜索历史么？',
+        onOk() {
+          deleteAllSearchHistory()
+          setSearchHistoryList(listSearchHistory())
+        }
+      })
+    }
+  }
+
+  /**
+   * 删除搜索历史
+   * @param e
+   * @param text
+   */
+  const delSearchHistory = (e: React.MouseEvent<HTMLAnchorElement>, text: string) => {
+    deleteSearchHistory(text)
+    setSearchHistoryList(listSearchHistory())
+    e.stopPropagation()
+  }
+
+  /**
+   * 渲染搜索历史标题
+   */
+  const renderSearchHistoryTitle = () => (
+    <span>
+      搜索历史
+      <a style={{ float: 'right' }} onClick={clearAll}>
+        <Space>
+          <DeleteOutlined />
+          清空
+        </Space>
+      </a>
+    </span>
+  )
+
+  /**
+   * 渲染搜索历史项
+   * @param item
+   */
+  const renderSearchHistoryItem = (item: string) => ({
+    value: item,
+    label: (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}
+      >
+        {item}
+        <a onClick={e => delSearchHistory(e, item)} style={{ fontSize: 10 }}>
+          <CloseOutlined />
+        </a>
+      </div>
+    )
   })
 
-  const [searchMode, setSearchMode] = useMergedState(defaultVisible ?? false, {
-    value: props.visible,
-    onChange: onVisibleChange
-  })
-
-  const inputClass = classNames(styles.input, {
-    [styles.show]: searchMode
-  })
+  /**
+   * 选项组
+   */
+  const options = [
+    {
+      label: renderSearchHistoryTitle(),
+      options: searchHistoryList.map(text => renderSearchHistoryItem(text))
+    }
+  ]
 
   return (
-    <div
-      className={classNames(className, styles.headerSearch)}
-      onClick={() => {
-        setSearchMode(true)
-        if (searchMode && inputRef.current) {
-          inputRef.current.focus()
-        }
-      }}
-      onTransitionEnd={({ propertyName }) => {
-        if (propertyName === 'width' && !searchMode) {
-          if (onVisibleChange) {
-            onVisibleChange(searchMode)
-          }
-        }
-      }}
-    >
-      <AutoComplete
-        key="AutoComplete"
-        style={{ width: '100%' }}
-        className={inputClass}
-        value={value}
-        options={restProps.options}
-        onChange={setValue}
-      >
-        <Input.Search
-          size="large"
-          ref={inputRef}
-          defaultValue={defaultValue}
-          aria-label={placeholder}
-          enterButton
-          placeholder={placeholder}
-          onKeyDown={e => {
-            if (e.key === 'Enter') {
-              if (restProps.onSearch) {
-                restProps.onSearch(value)
-              }
-            }
-          }}
-          onBlur={() => {
-            setSearchMode(false)
-          }}
-        />
+    <div className={styles.headerSearch} style={style}>
+      <AutoComplete options={options} style={{ width: '100%' }}>
+        <Input.Search placeholder={placeholder} size="large" enterButton onSearch={handleSearch} />
       </AutoComplete>
     </div>
   )

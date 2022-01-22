@@ -1,0 +1,9 @@
+{
+  "requestId": "4034731739c29",
+  "data": {
+    "signStr": "HKlEfqnPn9jsy9wJERDbvvdxV7D/AmmwGjaCd75ViL/KasJaX6anCIvLzUSQv5BzSMgyddL7y8tKY51wibsOtourojZ85wcSZ6lZVoybHPlCwVWMaIAapnFwfGtzh+ff07ZGV3HYAQt5B+aYbSb6AJDh24M4MOhKQ6iLiMgdgDcZajuTk2N3GDRis6ElHKUm0VsH2p/n8Yjw0eUvbg3OvWLj+dj2spnol077iI1hqHcIKLXA/DQVmykT1TDw5k4S+3m/XTGiaXebWOcqQsZP+1lm7Mk5Rh3kmtm0HP4yzFPjORKG2fKHwCqzzT4J8AIAN1uN3Ejz7csMqg==",
+    "wsUrl": "wss://tcb-ws.tencentcloudapi.com",
+    "secretVersion": 1642832863,
+    "envId": "codenav-8grj8px727565176"
+  }
+}

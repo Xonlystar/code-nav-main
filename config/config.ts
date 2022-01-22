@@ -26,6 +26,5 @@ export default defineConfig({
     basePath: '/'
   },
   exportStatic: {},
-  esbuild: {},
-  mock: false
+  esbuild: {}
 })

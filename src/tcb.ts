@@ -1,19 +1,8 @@
-import cloudbase from '@cloudbase/js-sdk'
 import axios from 'axios'
 import { CLOUD_FUNCTION_HOST } from '@/constant'
+import { TEST_ENV_ID, envId, defineCloudConfig } from '@/utils/env'
 
-// 测试环境 id
-const TEST_ENV_ID = 'test'
-// @custom 将你的环境 Id 填写到此处
-export const envId = TEST_ENV_ID
-
-const app = cloudbase.init({
-  env: envId
-})
-
-const auth = app.auth({
-  persistence: 'local'
-})
+const { app, auth } = defineCloudConfig()
 
 /**
  * 匿名登录

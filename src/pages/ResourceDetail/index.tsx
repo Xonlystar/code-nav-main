@@ -16,7 +16,7 @@ import {
   Typography
 } from 'antd'
 import type { FC } from 'react'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GridContent } from '@ant-design/pro-layout'
 import type { ConnectState } from '@/models/connect'
 import type { Dispatch } from 'umi'
@@ -75,10 +75,10 @@ const ResourceDetail: FC<ResourceDetailProps> = props => {
   useEffect(() => {
     if (resourceId) {
       getResource(resourceId)
-        ?.then(res => {
+        ?.then((res: any) => {
           if (res) {
             setResource(res)
-            getUserSimpleInfo(res.userId)?.then(tmpUser => {
+            getUserSimpleInfo(res.userId)?.then((tmpUser: any) => {
               setUser(tmpUser)
             })
           }

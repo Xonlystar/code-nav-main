@@ -1,6 +1,6 @@
 import { getCurrentUser, getUserById } from '@/services/user'
 import { getApp, tcbCustomLogin, tcbLogout } from '@/tcb'
-import { getMockData, MOCK_OPEN } from '../../mock'
+import { mockData, MOCK_OPEN } from '../../mock/data'
 
 const app = getApp()
 
@@ -16,9 +16,7 @@ export interface LoginParamsType {
  * @return user
  */
 export async function login(params: LoginParamsType) {
-  if (MOCK_OPEN) {
-    return getMockData(login.name)
-  }
+  if (MOCK_OPEN) return mockData['custom.login']
   // tcb 登录
   const loginState = await tcbCustomLogin(params.captcha)
   if (!loginState || loginState.loginType !== 'CUSTOM' || !loginState.user.customUserId) {

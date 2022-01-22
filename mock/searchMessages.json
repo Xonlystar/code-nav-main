@@ -1,0 +1,6 @@
+{
+  "requestId": "e7297022-3dba-4c55-bc76-93071f256834",
+  "data": {
+    "response_data": "{\"total\":1,\"data\":[{\"_id\":\"17e3426e61e8396007ed42a74232e883\",\"toUserId\":\"17e3426e61e119180634c2e0614e02b4\",\"title\":\"资源审核通过\",\"content\":\"您推荐的资源【React Docs Beta】已通过审核！\",\"fromUserId\":0,\"status\":1,\"type\":0,\"_createTime\":\"2022-01-19T16:16:32.763Z\",\"_updateTime\":\"2022-01-20T06:14:04.330Z\",\"isDelete\":false,\"readTime\":\"2022-01-20T06:14:04.330Z\"}]}"
+  }
+}

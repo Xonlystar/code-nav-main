@@ -1,0 +1,6 @@
+{
+  "requestId": "f70ef0f9-533d-4ac6-816d-b00936b64772",
+  "data": {
+    "response_data": "{\"_id\":\"17e3426e61e119180634c2e0614e02b4\",\"score\":12,\"language\":\"zh_CN\",\"likeResourceIds\":[\"bf4a0bf261e66359074cd2c8536e987d\"],\"interests\":[\"书籍\",\"教程\",\"工具\",\"前端\",\"Javascript\",\"开发\",\"小程序\",\"HTML\",\"CSS\",\"文章\"],\"_updateTime\":\"2022-01-22T05:36:56.001Z\",\"captcha\":\"xwbimt\",\"province\":\"\",\"unionId\":\"orSgH52pPl-pybSi6I5lfE6T6QVI\",\"gender\":0,\"mpOpenId\":\"oFOl25pEScQDvUCDXqejRy4uryfA\",\"captchaExpireTime\":\"2022-01-15T14:01:40.398Z\",\"city\":\"\",\"country\":\"\",\"isDelete\":false,\"nickName\":\"随波逐流\",\"_createTime\":\"2022-01-14T06:32:56.105Z\",\"avatarUrl\":\"https://636f-codenav-8grj8px727565176-1256524210.tcb.qcloud.la/img/1642142015294-78882\",\"lastLoginTime\":\"2022-01-22T05:36:56.001Z\",\"email\":\"onlyxhb@qq.com\",\"profile\":\"随波逐流的痛苦你们不懂\",\"coin\":5}"
+  }
+}

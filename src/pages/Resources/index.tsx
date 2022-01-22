@@ -176,6 +176,7 @@ const Resources: FC<ResourcesProps> = props => {
             </Radio.Group>
           </Form.Item>
           <Form.Item
+            valuePropName="checked"
             label={
               <>
                 <LikeOutlined /> <span style={{ marginLeft: 8 }}>精选</span>

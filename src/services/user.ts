@@ -1,6 +1,5 @@
 import { getApp } from '@/tcb'
 import { listResourcesByIdsByPage } from '@/services/resource'
-import { getMockData, MOCK_OPEN } from '../../mock'
 
 const app = getApp()
 
@@ -60,10 +59,6 @@ export function getCurrentUser(unionId: string) {
  * @param userId
  */
 export function getUserSimpleInfo(userId: string) {
-  if (MOCK_OPEN) {
-    return getMockData(getUserSimpleInfo.name)
-  }
-
   if (!userId) {
     return null
   }

@@ -254,7 +254,7 @@ export default [
           },
           {
             name: '开发必备',
-            path: '/topic/dev'
+            path: '/topic/develop'
           }
         ]
       },

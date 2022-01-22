@@ -2,6 +2,7 @@ import { getApp } from '@/tcb'
 import type { NoticeType } from '@/models/notice'
 import { wrapPageQuery } from '@/utils/utils'
 import type cloudbase from '@cloudbase/js-sdk'
+import { mockData, MOCK_OPEN } from '../../mock/data'
 
 const app = getApp()
 const db = app.database()
@@ -71,13 +72,14 @@ export function deleteNotice(noticeId: string) {
  * @param params
  */
 export async function searchNoticesByPage(params: NoticeSearchParams) {
+  if (MOCK_OPEN) return mockData['list.empty']
   const { pageSize = 12, pageNum = 1 } = params
   const condition = { isDelete: false }
   // 分页查总数
   const total = await collection
     .where(condition)
     .count()
-    .then(res => res.total)
+    .then((res: any) => res.total)
 
   const query = wrapPageQuery(collection.where(condition), pageSize, pageNum)
   return query
@@ -111,12 +113,14 @@ export function openNoticeWatcher(callback: (notice: NoticeType) => void) {
     return null
   }
 
+  if (MOCK_OPEN) return {}
+
   noticeWatcher = collection
     .where({
       isDelete: false
     })
     .watch({
-      onChange(snapshot) {
+      onChange(snapshot: any) {
         const { docChanges } = snapshot
         if (docChanges && docChanges.length > 0) {
           for (let i = 0; i < docChanges.length; i += 1) {
@@ -126,7 +130,7 @@ export function openNoticeWatcher(callback: (notice: NoticeType) => void) {
           }
         }
       },
-      onError(err) {
+      onError(err: any) {
         console.error('notice watch closed', err)
       }
     })

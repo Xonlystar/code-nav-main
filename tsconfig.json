@@ -37,7 +37,8 @@
     ".prettierrc.js",
     "jest.config.js",
     "mock/*",
-    "config/*"
+    "config/*",
+    "data/tap.ts"
   ],
   "exclude": ["node_modules", "build", "dist", "scripts", "src/.umi/*", "webpack", "jest"]
 }

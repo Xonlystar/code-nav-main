@@ -2,7 +2,7 @@ import { getApp } from '@/tcb'
 import { wrapPageQuery } from '@/utils/utils'
 import type { ResourceType } from '@/models/resource'
 import reviewStatusEnum, { reviewStatusInfoMap } from '@/constant/reviewStatusEnum'
-import { getMockData, MOCK_OPEN } from '../../mock'
+import { mockData, MOCK_OPEN } from '../../mock/data'
 
 const app = getApp()
 const db = app.database()
@@ -53,6 +53,8 @@ export function addResource(params: ResourceType) {
  * @param params
  */
 export async function searchResources(params: ResourceSearchParams) {
+  if (MOCK_OPEN) return mockData['database.queryDocumentList'].data.list
+
   const condition = getSearchConditions(params)
   const query = wrapPageQuery(collection.where(condition), params.pageSize, params.pageNum)
   return query
@@ -73,17 +75,15 @@ export async function searchResources(params: ResourceSearchParams) {
  * @param params
  */
 export async function searchResourcesByPage(params: ResourceSearchParams) {
-  if (MOCK_OPEN) {
-    return getMockData(searchResourcesByPage.name)
-  }
+  if (MOCK_OPEN) return mockData['database.searchResourcesByPage']
   const { pageSize = 12, pageNum = 1 } = params
   const condition = getSearchConditions(params)
   // 分页查总数
   const total = await collection
     .where(condition)
     .count()
-    .then(res => res.total)
-    .catch(err => {
+    .then((res: any) => res.total)
+    .catch((err: any) => {
       console.error('getTotal error', err)
       return 0
     })
@@ -237,14 +237,12 @@ export async function updateResource(resourceId: string, resource: Partial<Resou
  * 根据 id 获取资源
  * @param resourceId
  */
-export function getResource(resourceId: string) {
-  if (MOCK_OPEN) {
-    return getMockData(getResource.name)
-  }
-
+export async function getResource(resourceId: string) {
   if (!resourceId) {
     return null
   }
+
+  if (MOCK_OPEN) return mockData['document.getResource'].data.list[0]
 
   return collection
     .where({

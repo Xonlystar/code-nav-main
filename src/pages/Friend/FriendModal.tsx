@@ -10,7 +10,7 @@ import type { ConnectState } from '@/models/connect'
 import { addOrUpdateUserIntroduce, getUserIntroduce } from '@/services/userIntroduce'
 import type { UserIntroduceType } from '@/models/userIntroduce'
 import { reviewStatusInfoMap } from '@/constant/reviewStatusEnum'
-import './style.less'
+import './FriendModal.less'
 
 const FormItem = Form.Item
 

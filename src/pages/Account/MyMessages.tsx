@@ -9,7 +9,7 @@ import type { MessageSearchParams } from '@/services/message'
 import { deleteMessage, readMessage, searchMessages } from '@/services/message'
 import { MESSAGE_STATUS_ENUM, MESSAGE_STATUS_MAP, MESSAGE_TYPE_MAP } from '@/constant/message'
 import { FilterOutlined } from '@ant-design/icons'
-import './style.less'
+import './MyMessages.less'
 
 interface MyMessagesProps {
   currentUser: CurrentUser

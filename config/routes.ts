@@ -204,13 +204,13 @@ export default [
             exact: true,
             name: '资源专区',
             path: '/topics',
-            component: './Testing'
+            component: './Resources'
           },
           {
             exact: true,
             name: '专题',
-            path: '/topics/:key',
-            component: './Testing',
+            path: '/topic/:key',
+            component: './Resources',
             authority: ['user', 'admin']
           },
           {

@@ -15,6 +15,10 @@ export interface CurrentUser {
   likeResourceIds?: string[]
   interests?: string[]
   score?: number
+  coin?: number
+  email?: string
+  profile?: string
+  _createTime?: string
   title?: string
 }
 

@@ -8,7 +8,7 @@ import type { LoginType } from '@/models/login'
 import type { LoginParamsType } from '@/services/login'
 import type { ConnectState } from '@/models/connect'
 import qrcode from '@/assets/qrcode.jpg'
-import styles from './index.less'
+import styles from './Login.less'
 
 interface LoginProps {
   dispatch: Dispatch

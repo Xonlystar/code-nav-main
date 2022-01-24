@@ -56,20 +56,6 @@ export interface BasicLayoutProps extends ProLayoutProps {
   currentUser: CurrentUser
 }
 
-/**
- * use Authorized check all menu item
- */
-
-const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => {
-  return menuList.map(item => {
-    const localItem = {
-      ...item,
-      children: item.children ? menuDataRender(item.children) : undefined
-    }
-    return Authorized.check(item.authority, localItem, null) as MenuDataItem
-  })
-}
-
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
   const {
     dispatch,
@@ -170,6 +156,16 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
       authority = r.authority
     }
   })
+
+  const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => {
+    return menuList.map(item => {
+      const localItem = {
+        ...item,
+        children: item.children ? menuDataRender(item.children) : undefined
+      }
+      return Authorized.check(item.authority, localItem, null) as MenuDataItem
+    })
+  }
 
   return (
     <ProLayout

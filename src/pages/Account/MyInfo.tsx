@@ -1,4 +1,5 @@
-import { Card, Descriptions, Image, message, Modal, Progress, Tag, Tooltip } from 'antd'
+import { Card, Descriptions, message, Modal, Tag, Button, Badge, Typography, Avatar } from 'antd'
+import { EditOutlined } from '@ant-design/icons'
 import { Component } from 'react'
 import { GridContent } from '@ant-design/pro-layout'
 import type { Dispatch } from 'umi'
@@ -7,12 +8,11 @@ import type { RouteChildrenProps } from 'react-router'
 import type { CurrentUser } from '@/models/user'
 import type { ConnectState } from '@/models/connect'
 import { getLevel } from '@/utils/businessUtils'
-import { SettingTwoTone } from '@ant-design/icons/lib'
 import { updateUserInterests } from '@/services/user'
 import { NoAuth } from '@/components/NoAuth'
 import SelectTags from '@/components/SelectTags'
+import moment from 'moment'
 import type { WholeTagsMap } from '@/models/tag'
-import styles from './Center.less'
 
 type MyInfoProps = {
   dispatch: Dispatch
@@ -128,29 +128,46 @@ class MyInfo extends Component<MyInfoProps, MyInfoState> {
 
     return currentUser._id ? (
       <GridContent>
-        <Card bordered={false} style={{ marginBottom: 24 }} loading={dataLoading}>
-          <div className={styles.avatarHolder}>
-            <Image className={styles.avatar} src={currentUser?.avatarUrl} />
-            <div className={styles.name}>{currentUser?.nickName}</div>
-            <Tag color={level.color} style={{ marginRight: 0, margin: '8px 0', userSelect: 'none' }}>
-              {level.name}
-            </Tag>
-            <Tooltip title={`积分：${currentUser?.score} / ${level.score}`} placement="topRight">
-              <Progress percent={(score * 100) / level.score} size="small" showInfo={false} />
-            </Tooltip>
-          </div>
-          <Descriptions
-            title="兴趣"
-            column={1}
-            extra={<SettingTwoTone style={{ fontSize: 16 }} onClick={this.openInterestsModal} />}
-          >
-            <Descriptions.Item>{interestsTagView}</Descriptions.Item>
+        <Card loading={dataLoading}>
+          <Badge.Ribbon className="hidden">
+            <Card.Meta
+              avatar={<Avatar size={96} style={{ border: '1px solid #eee' }} src={currentUser?.avatarUrl} />}
+              title={
+                <div>
+                  <Typography.Title level={4}>{currentUser?.nickName}</Typography.Title>
+                  <Tag color={level.color} style={{ marginRight: 0, margin: '8px 0', userSelect: 'none' }}>
+                    {level.name}
+                  </Tag>
+                </div>
+              }
+            />
+          </Badge.Ribbon>
+        </Card>
+        <div style={{ marginTop: '16px' }} />
+        <Card
+          title="信息"
+          extra={
+            <Button icon={<EditOutlined />} onClick={this.openInterestsModal} type="link">
+              编辑
+            </Button>
+          }
+        >
+          <Descriptions column={1} colon={false} labelStyle={{ width: '100px', marginBottom: '8px' }}>
+            <Descriptions.Item label="积分">{currentUser?.score}</Descriptions.Item>
+            <Descriptions.Item label="鱼币">{currentUser?.coin}</Descriptions.Item>
+            <Descriptions.Item label="兴趣">{interestsTagView}</Descriptions.Item>
+            <Descriptions.Item label="邮箱">{currentUser?.email}</Descriptions.Item>
+            <Descriptions.Item label="个人简介">{currentUser?.profile}</Descriptions.Item>
+            <Descriptions.Item label="所在地区">{currentUser?.province || '暂无'}</Descriptions.Item>
+            <Descriptions.Item label="注册时间">
+              {moment(currentUser?._createTime).format('YYYY-MM-DD mm:DD:hh')}
+            </Descriptions.Item>
           </Descriptions>
         </Card>
         <Modal
-          title={`设置兴趣（至多 ${MAX_INTEREST_NUM} 个）`}
+          title="修改信息"
           visible={showInterestsModal}
-          okText={interestsSubmitting ? '保存中' : '保存'}
+          okText={interestsSubmitting ? '提交中' : '提交'}
           okButtonProps={{ loading: interestsSubmitting, disabled: interestsSubmitting }}
           onOk={this.saveInterests}
           onCancel={this.doModalCancel}

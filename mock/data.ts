@@ -16,6 +16,8 @@ import searchUserScores from './searchUserScores.json'
 import searchInviteRecords from './searchInviteRecords.json'
 import searchWishes from './searchWishes.json'
 import updateUser from './updateUser.json'
+import addShareNum from './addShareNum.json'
+import likeResource from './likeResource.json'
 
 import wsWebSign from './wsWebSign.json'
 import queryDocument from './queryDocument.json'
@@ -71,5 +73,7 @@ export default {
   'POST /test/searchInviteRecords': (req: Request, res: Response) => res.json(searchInviteRecords),
   'POST /test/searchWishes': (req: Request, res: Response) => res.json(searchWishes),
   'POST /test/updateUser': (req: Request, res: Response) => res.json(updateUser),
-  'POST /test/searchResources': (req: Request, res: Response) => res.json(searchResources)
+  'POST /test/searchResources': (req: Request, res: Response) => res.json(searchResources),
+  'POST /test/addShareNum': (req: Request, res: Response) => res.json(addShareNum),
+  'POST /test/likeResource': (req: Request, res: Response) => res.json(likeResource)
 }

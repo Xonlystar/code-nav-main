@@ -58,6 +58,7 @@ export async function tcbCustomLogin(captcha: any) {
  * @return {Promise<void>}
  */
 export function tcbLogout() {
+  if (process.env.NODE_ENV === 'development') return Promise.resolve()
   return auth.signOut()
 }
 

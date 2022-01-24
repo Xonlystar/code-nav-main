@@ -46,83 +46,83 @@ export default [
     children: [
       {
         name: '找教程',
-        path: 'topic/教程',
+        path: '/topic/教程',
         icon: <ContainerOutlined />
       },
       {
         name: '找书籍',
-        path: 'topic/书籍',
+        path: '/topic/书籍',
         icon: <BookOutlined />
       },
       {
         name: '找项目',
-        path: 'topic/项目源码',
+        path: '/topic/项目源码',
         icon: <LaptopOutlined />
       },
       {
         name: '工具箱',
-        path: 'topic/工具',
+        path: '/topic/工具',
         icon: <ToolOutlined />
       },
       {
         name: '必修基础',
-        path: 'topic/basic',
+        path: '/topic/basic',
         icon: <FieldBinaryOutlined />,
         children: [
           {
             name: '算法数据结构',
-            path: 'topic/算法'
+            path: '/topic/算法'
           },
           {
             name: '计算机系统',
-            path: 'topic/系统'
+            path: '/topic/系统'
           },
           {
             name: '计算机网络',
-            path: 'topic/网络'
+            path: '/topic/网络'
           },
           {
             name: '软件开发',
-            path: 'topic/软件开发'
+            path: '/topic/软件开发'
           }
         ]
       },
       {
         name: '编程语言',
-        path: 'topic/language',
+        path: '/topic/language',
         icon: <CodeOutlined />,
         children: [
           {
             name: 'Java',
-            path: 'topic/Java'
+            path: '/topic/Java'
           },
           {
             name: 'Python',
-            path: 'topic/Python'
+            path: '/topic/Python'
           },
           {
             name: 'C++',
-            path: 'topic/Cplusplus'
+            path: '/topic/Cplusplus'
           },
           {
             name: 'C 语言',
-            path: 'topic/C语言'
+            path: '/topic/C语言'
           },
           {
             name: 'Go 语言',
-            path: 'topic/Go'
+            path: '/topic/Go'
           },
           {
             name: 'JavaScript',
-            path: 'topic/JavaScript'
+            path: '/topic/JavaScript'
           },
           {
             name: 'PHP',
-            path: 'topic/PHP'
+            path: '/topic/PHP'
           },
           {
             name: 'C#',
-            path: 'topic/csharp'
+            path: '/topic/csharp'
           }
         ]
       },
@@ -133,59 +133,59 @@ export default [
         children: [
           {
             name: '前端',
-            path: 'topic/前端'
+            path: '/topic/前端'
           },
           {
             name: '后端',
-            path: 'topic/后端'
+            path: '/topic/后端'
           },
           {
             name: '人工智能',
-            path: 'topic/人工智能'
+            path: '/topic/人工智能'
           },
           {
             name: '大数据',
-            path: 'topic/大数据'
+            path: '/topic/大数据'
           },
           {
             name: '云计算',
-            path: 'topic/云计算'
+            path: '/topic/云计算'
           },
           {
             name: '物联网',
-            path: 'topic/物联网'
+            path: '/topic/物联网'
           },
           {
             name: '软件测试',
-            path: 'topic/测试'
+            path: '/topic/测试'
           },
           {
             name: 'Android 开发',
-            path: 'topic/Android'
+            path: '/topic/Android'
           },
           {
             name: 'IOS 开发',
-            path: 'topic/IOS'
+            path: '/topic/IOS'
           },
           {
             name: 'Linux 运维',
-            path: 'topic/运维'
+            path: '/topic/运维'
           },
           {
             name: '信息安全',
-            path: 'topic/信息安全'
+            path: '/topic/信息安全'
           },
           {
             name: '产品设计',
-            path: 'topic/产品设计'
+            path: '/topic/产品设计'
           },
           {
             name: '小程序',
-            path: 'topic/小程序'
+            path: '/topic/小程序'
           },
           {
             name: '区块链',
-            path: 'topic/区块链'
+            path: '/topic/区块链'
           }
         ]
       },
@@ -335,6 +335,7 @@ export default [
     path: '/account',
     name: '个人',
     icon: <UserAddOutlined />,
+    authority: ['user', 'admin'],
     children: [
       {
         path: '/account/info',

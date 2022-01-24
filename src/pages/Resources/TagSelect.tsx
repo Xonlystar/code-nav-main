@@ -3,7 +3,7 @@ import { Tag } from 'antd'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
 
 import classNames from 'classnames'
-import styles from './index.less'
+import styles from './TagSelect.less'
 
 const { CheckableTag } = Tag
 

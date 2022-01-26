@@ -158,7 +158,7 @@ export default [
                 exact: true,
                 name: '推荐记录',
                 path: '/account/recommend',
-                component: './Account/AddResources'
+                component: './Account/Recommend'
               },
               {
                 exact: true,

@@ -1,4 +1,4 @@
-import { Badge, Button, List, message, Popconfirm, Tag } from 'antd'
+import { Badge, Button, List, message, Popconfirm, Tag, Card, Space } from 'antd'
 import React, { Component } from 'react'
 import { connect } from 'umi'
 import type { CurrentUser } from '@/models/user'
@@ -116,7 +116,20 @@ class MyMessages extends Component<MyMessagesProps, MyMessagesState> {
     const { list, loading, total, searchParams, deleteLoading } = this.state
 
     return (
-      <div className="my-messages">
+      <Card
+        title="消息"
+        extra={
+          <Space size={16}>
+            <Button key={1} type="default">
+              全部已读
+            </Button>
+            <Button key={2} type="default">
+              清空
+            </Button>
+          </Space>
+        }
+        className="my-messages"
+      >
         <LightFilter
           bordered
           collapseLabel={<FilterOutlined />}
@@ -181,6 +194,7 @@ class MyMessages extends Component<MyMessagesProps, MyMessagesState> {
                   }
                   description={item.content}
                 />
+                <div style={{ fontSize: '14px', color: 'rgb(170, 170, 170)' }}>7 天前</div>
               </List.Item>
             )
           }}
@@ -202,7 +216,7 @@ class MyMessages extends Component<MyMessagesProps, MyMessagesState> {
             }
           }}
         />
-      </div>
+      </Card>
     )
   }
 }

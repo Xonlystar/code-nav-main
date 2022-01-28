@@ -10,11 +10,11 @@ import { searchResourcesByPage } from '@/services/resource'
 import type { CurrentUser } from '@/models/user'
 import type { ConnectState } from '@/models/connect'
 
-interface RecommendProps {
+interface MyWishProps {
   currentUser?: CurrentUser
 }
 
-interface RecommendState {
+interface MyWishState {
   resources?: ResourceType[]
   total: number
   reviewStatus: number | undefined
@@ -32,10 +32,10 @@ const listGrid = {
 
 const DEFAULT_PAGE_SIZE = 6
 
-const Recommend: FC<RecommendProps> = props => {
+const MyWish: FC<MyWishProps> = props => {
   const { currentUser } = props
   const [loading, setLoading] = useState(true)
-  const [state, setState] = useState<RecommendState>({
+  const [state, setState] = useState<MyWishState>({
     resources: [],
     total: 0,
     reviewStatus: undefined
@@ -44,7 +44,7 @@ const Recommend: FC<RecommendProps> = props => {
   /**
    * 加载我推荐的资源
    */
-  const loadRecommend = (pageNum: number, pageSize: number) => {
+  const loadMyWish = (pageNum: number, pageSize: number) => {
     if (currentUser && currentUser._id) {
       setLoading(true)
       searchResourcesByPage({
@@ -66,7 +66,7 @@ const Recommend: FC<RecommendProps> = props => {
   }
 
   useEffect(() => {
-    loadRecommend(1, DEFAULT_PAGE_SIZE)
+    loadMyWish(1, DEFAULT_PAGE_SIZE)
   }, [])
 
   const handleValuesChange = async (values: any) => {
@@ -77,7 +77,7 @@ const Recommend: FC<RecommendProps> = props => {
   }
 
   return (
-    <Card title="推荐记录">
+    <Card title="心愿">
       <LightFilter
         initialValues={{ reviewStatus: state.reviewStatus }}
         bordered
@@ -103,11 +103,11 @@ const Recommend: FC<RecommendProps> = props => {
           total: state.total,
           onChange: (pageNum, pageSize) => {
             if (pageSize) {
-              loadRecommend(pageNum, pageSize)
+              loadMyWish(pageNum, pageSize)
             }
           }
         }}
-        dataSource={state.resources}
+        dataSource={[]}
         renderItem={item => {
           return (
             <List.Item key={item._id}>
@@ -117,10 +117,10 @@ const Recommend: FC<RecommendProps> = props => {
         }}
         locale={{
           emptyText: (
-            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="您还没有推荐过资源哦">
-              <Link to="/addResource">
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="您还没有心愿哦">
+              <Link to="/wish">
                 <Button type="primary" size="large">
-                  推荐资源得积分
+                  发布心愿
                 </Button>
               </Link>
             </Empty>
@@ -133,4 +133,4 @@ const Recommend: FC<RecommendProps> = props => {
 
 export default connect(({ user }: ConnectState) => ({
   currentUser: user.currentUser
-}))(Recommend)
+}))(MyWish)

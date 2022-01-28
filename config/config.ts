@@ -20,7 +20,7 @@ export default defineConfig({
     'primary-color': defaultSettings.primaryColor
   },
   title: false,
-  ignoreMomentLocale: true,
+  // ignoreMomentLocale: true,
   proxy: proxy[REACT_APP_ENV || 'dev'],
   manifest: {
     basePath: '/'

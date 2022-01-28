@@ -67,7 +67,7 @@ const Model: LoginModelType = {
         description: isFirstDailyLogin ? '每日登录积分 +1' : '',
         top: 64
       })
-      if (window.location.pathname === '/user/login') {
+      if (window.location.pathname === '/account/login') {
         const urlParams = new URL(window.location.href)
         const params = getPageQuery()
         let { redirect } = params as { redirect: string }
@@ -105,9 +105,9 @@ const Model: LoginModelType = {
         payload: {}
       })
       // Note: There may be security issues, please note
-      if (window.location.pathname !== '/user/login' && !redirect) {
+      if (window.location.pathname !== '/account/login' && !redirect) {
         history.replace({
-          pathname: '/user/login',
+          pathname: '/account/login',
           search: stringify({
             redirect: window.location.href
           })

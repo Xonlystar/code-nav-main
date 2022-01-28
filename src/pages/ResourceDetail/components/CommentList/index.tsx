@@ -193,7 +193,7 @@ const CommentList: React.FC<CommentListProps> = props => {
         />
       ) : (
         <Button type="primary" size="large" style={{ width: '100%' }}>
-          <Link to="/user/login">点击登录后发表评论</Link>
+          <Link to="/account/login">点击登录后发表评论</Link>
         </Button>
       )}
     </div>

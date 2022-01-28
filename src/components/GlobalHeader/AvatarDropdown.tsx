@@ -94,7 +94,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = props => {
     </Dropdown>
   ) : (
     <Tooltip title="登录后，享用全部功能" placement="bottomLeft" defaultVisible>
-      <Link to="/user/login">
+      <Link to="/account/login">
         <span className={`${styles.action} ${styles.account}`}>
           <Avatar icon={<UserOutlined />} />
         </span>

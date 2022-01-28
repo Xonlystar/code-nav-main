@@ -23,8 +23,8 @@ export default [
           {
             name: '登录',
             exact: true,
-            path: '/user/login',
-            component: './user/login'
+            path: '/account/login',
+            component: './Account/login'
           }
         ]
       },
@@ -171,19 +171,19 @@ export default [
                 exact: true,
                 name: '我的心愿',
                 path: '/account/wish',
-                component: './Testing'
+                component: './Account/Wish'
               },
               {
                 exact: true,
                 name: '邀请好友',
                 path: '/account/invite',
-                component: './Testing'
+                component: './Account/Invite'
               },
               {
                 exact: true,
                 name: '积分记录',
                 path: '/account/score',
-                component: './Testing'
+                component: './Account/Score'
               }
             ]
           },
@@ -245,7 +245,7 @@ export default [
             exact: true,
             name: '激励榜',
             path: '/ranking',
-            component: './Ranking'
+            component: './World/Ranking'
           },
           {
             exact: true,
@@ -281,7 +281,7 @@ export default [
             exact: true,
             name: '心愿墙',
             path: '/wish',
-            component: './Testing'
+            component: './World/Wish'
           },
           {
             exact: true,
@@ -293,7 +293,7 @@ export default [
             exact: true,
             name: '找伙伴',
             path: '/friend',
-            component: './Friend',
+            component: './World/Friend',
             authority: ['user', 'admin']
           },
           {

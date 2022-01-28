@@ -15,7 +15,7 @@ import { URL_REG } from '@/utils/utils'
 import { SearchOutlined } from '@ant-design/icons/lib'
 import { NoAuth } from '@/components/NoAuth'
 import SelectTags from '@/components/SelectTags'
-import PicUploader from '../../components/PicUploader'
+import PicUploader from '@/components/PicUploader'
 import './style.less'
 
 const FormItem = Form.Item

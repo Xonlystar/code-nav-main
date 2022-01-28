@@ -120,17 +120,17 @@ export function updateUserInterests(interests: string[]) {
 
   return app
     .callFunction({
-      name: 'updateUserInterests',
+      name: 'updateUser',
       data: {
         interests
       }
     })
     .then((res: any) => {
-      console.log(`updateUserInterests succeed`, res)
+      console.log(`updateUser succeed`, res)
       return true
     })
     .catch((e: any) => {
-      console.error(`updateUserInterests error`, e)
+      console.error(`updateUser error`, e)
       return false
     })
 }

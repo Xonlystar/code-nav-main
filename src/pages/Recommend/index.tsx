@@ -70,7 +70,7 @@ class Recommend extends Component<RecommendProps, RecommendState> {
       >
         {!currentUser._id ? (
           <Button type="primary" size="large">
-            <Link to="/user/login">点击登录 查看更多</Link>
+            <Link to="/account/login">点击登录 查看更多</Link>
           </Button>
         ) : (
           <Button

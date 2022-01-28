@@ -103,7 +103,7 @@ const ResourceDetail: FC<ResourceDetailProps> = props => {
     if (!loginStatus || !loginStatus.userId) {
       message.warning('登录后才能收藏资源哦！')
       history.replace({
-        pathname: '/user/login',
+        pathname: '/account/login',
         search: stringify({
           redirect: window.location.href
         })

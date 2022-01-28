@@ -1,6 +1,7 @@
 import { Badge, Button, List, message, Popconfirm, Tag, Card, Space } from 'antd'
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'umi'
+import moment from 'moment'
 import type { CurrentUser } from '@/models/user'
 import type { ConnectState } from '@/models/connect'
 import type { MessageType } from '@/models/message'
@@ -24,6 +25,7 @@ interface MyMessagesState {
 }
 
 const PAGE_SIZE = 8
+moment.locale('zh-cn')
 
 class MyMessages extends Component<MyMessagesProps, MyMessagesState> {
   state: MyMessagesState = {
@@ -194,7 +196,9 @@ class MyMessages extends Component<MyMessagesProps, MyMessagesState> {
                   }
                   description={item.content}
                 />
-                <div style={{ fontSize: '14px', color: 'rgb(170, 170, 170)' }}>7 天前</div>
+                <div style={{ fontSize: '14px', color: 'rgb(170, 170, 170)' }}>
+                  {moment(item._createTime).fromNow()}
+                </div>
               </List.Item>
             )
           }}
@@ -202,6 +206,7 @@ class MyMessages extends Component<MyMessagesProps, MyMessagesState> {
             pageSize: searchParams.pageSize ?? PAGE_SIZE,
             current: searchParams.pageNum ?? 1,
             showSizeChanger: false,
+            showTotal: () => `总数${total}`,
             total,
             onChange: (pageNum, pageSize) => {
               const params = {

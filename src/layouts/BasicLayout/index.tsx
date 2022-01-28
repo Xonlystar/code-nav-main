@@ -33,7 +33,7 @@ const noMatch = (
       <Button type="primary" size="large">
         <Link
           to={{
-            pathname: '/user/login',
+            pathname: '/account/login',
             search: stringify({
               redirect: window.location.href
             })

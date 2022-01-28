@@ -12,7 +12,7 @@ import { EditOutlined, LikeFilled, LikeOutlined, MessageOutlined } from '@ant-de
 import type { UserIntroduceUserType } from '@/models/userIntroduce'
 import type { UserIntroduceSearchParams } from '@/services/userIntroduce'
 import { searchUserIntroduces, thumbUpUserIntroduce } from '@/services/userIntroduce'
-import FriendModal from '@/pages/Friend/FriendModal'
+import FriendModal from './components/FriendModal'
 import reviewStatusEnum from '@/constant/reviewStatusEnum'
 import copy from 'copy-to-clipboard'
 import moment from 'moment'
